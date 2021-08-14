@@ -9,10 +9,11 @@ public class testClass {
     public static void main(String[] args) {
 
 
-        System.setProperty("webdriver.chrome.driver","Chromerdriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","D:\\Selenium\\testRepository\\testProject\\Chromerdriver\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://demo.opencart.com/index.php?route=account/login");
-                WebElement password;
+
+        WebElement password;
         password = driver.findElement(By.id("input-password"));
         password.sendKeys("Pakistan123");
 
@@ -33,10 +34,29 @@ public class testClass {
         addtoCartButton.click();
 
         WebElement addCartButton;
-        addCartButton = driver.findElement(By.xpath("//*[@id=\"button-cart\"]"));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        addCartButton = driver.findElement(By.xpath("//button[@class='btn btn-primary btn-lg btn-block']"));
         addCartButton.click();
 
-        //*[@id="button-cart"]
+        WebElement itemButton = driver.findElement(By.xpath("//button[@class='btn btn-inverse btn-block btn-lg dropdown-toggle']"));
+        itemButton.click();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement viewCart = driver.findElement(By.xpath("//p[@class=\"text-right\"]/a[@href='https://demo.opencart.com/index.php?route=checkout/cart']"));
+        viewCart.click();
+
+        WebElement removeItemfromCart = driver.findElement(By.xpath("//button[@class=\"btn btn-danger\"]"));
+        removeItemfromCart.click();
+
+
 
         //String actualpagetitle = driver.getTitle();
         //String expectedtitle = "Account Logout";
